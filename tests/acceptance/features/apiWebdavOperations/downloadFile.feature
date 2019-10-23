@@ -98,3 +98,47 @@ Feature: download file
       | dav_version |
       | old         |
       | new         |
+
+  @public_link_share-feature-required
+  Scenario: download a public shared file with correct password
+    Given the administrator has enabled DAV tech_preview
+    And user "user0" has created a public link share with settings
+      | path     | welcome.txt |
+      | password | newpasswd   |
+    When the public downloads the last public shared file with range "bytes=51-77" and password "newpasswd" using the new public WebDAV API
+    Then the downloaded content should be "example file for developers"
+    When the public downloads the last public shared file with range "bytes=51-77" and password "newpasswd" using the old public WebDAV API
+    Then the downloaded content should be "example file for developers"
+
+  @public_link_share-feature-required
+  Scenario: download a public shared file with wrong password
+    Given the administrator has enabled DAV tech_preview
+    And user "user0" has created a public link share with settings
+      | path     | welcome.txt |
+      | password | newpasswd   |
+    When the public downloads the last public shared file with password "wrongpasswd" using the new public WebDAV API
+    And the value of the item "//s:message" in the response should match "/Username or password was incorrect/"
+    When the public downloads the last public shared file with password "wrongpasswd" using the old public WebDAV API
+    And the value of the item "//s:message" in the response should be "Cannot authenticate over ajax calls"
+
+  @public_link_share-feature-required
+  Scenario: download a public shared file without password
+    Given the administrator has enabled DAV tech_preview
+    And user "user0" has created a public link share with settings
+      | path     | welcome.txt |
+      | password | newpasswd   |
+    When the public downloads the last public shared file using the new public WebDAV API
+    And the value of the item "//s:message" in the response should match "/No 'Authorization: Basic' header found/"
+    When the public downloads the last public shared file with password "" using the old public WebDAV API
+    And the value of the item "//s:message" in the response should be "Cannot authenticate over ajax calls"
+
+  @public_link_share-feature-required
+  Scenario: try to download the public share with upload only permessions
+    Given the administrator has enabled DAV tech_preview
+    And user "user0" has created a public link share with settings
+      | path        | PARENT          |
+      | permissions | uploadwriteonly |
+    When the public downloads file "parent.txt" from inside the last public shared folder using the new public WebDAV API
+    Then the downloaded content should be "ownCloud test text file parent" plus end-of-line
+    When the public downloads file "parent.txt" from inside the last public shared folder using the old public WebDAV API
+    Then the downloaded content should be "ownCloud test text file parent" plus end-of-line
