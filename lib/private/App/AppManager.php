@@ -160,9 +160,13 @@ class AppManager implements IAppManager {
 	 */
 	public function getEnabledAppsForUser(IUser $user = null) {
 		$apps = $this->getInstalledAppsValues();
-		$appsForUser = \array_filter($apps, function ($enabled) use ($user) {
-			return $this->checkAppForUser($enabled, $user);
-		});
+		$regulatedAppForUser = false;
+		if ($user !== null) {
+			$regulatedAppForUser = \OC::$server->getRegulateAppAccessService()->getWhitelistedAppsForUser($user);
+		}
+		$appsForUser = \array_filter($apps, function ($enabled, $appName) use ($user, $regulatedAppForUser) {
+			return $this->checkAppForUser($enabled, $appName, $user, $regulatedAppForUser);
+		}, ARRAY_FILTER_USE_BOTH);
 		return \array_keys($appsForUser);
 	}
 
@@ -182,7 +186,7 @@ class AppManager implements IAppManager {
 		}
 		$installedApps = $this->getInstalledAppsValues();
 		if (isset($installedApps[$appId])) {
-			return $this->checkAppForUser($installedApps[$appId], $user);
+			return $this->checkAppForUser($installedApps[$appId], $appId, $user);
 		} else {
 			return false;
 		}
@@ -190,10 +194,17 @@ class AppManager implements IAppManager {
 
 	/**
 	 * @param string $enabled
+	 * @param string $appName
 	 * @param IUser $user
+	 * @param bool|array $regulatedAppsForUser
 	 * @return bool
 	 */
-	private function checkAppForUser($enabled, $user) {
+	private function checkAppForUser($enabled, $appName, $user, $regulatedAppsForUser = false) {
+		if ($regulatedAppsForUser !== false) {
+			if (!\in_array($appName, $regulatedAppsForUser)) {
+				return  false;
+			}
+		}
 		if ($enabled === 'yes') {
 			return true;
 		} elseif ($user === null) {

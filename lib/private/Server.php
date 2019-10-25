@@ -41,6 +41,7 @@
 namespace OC;
 
 use bantu\IniGetWrapper\IniGetWrapper;
+use OC\App\RegulateAppAccess;
 use OC\AppFramework\Http\Request;
 use OC\AppFramework\Db\Db;
 use OC\AppFramework\Utility\TimeFactory;
@@ -907,6 +908,10 @@ class Server extends ServerContainer implements IServerContainer, IServiceLoader
 		$this->registerService(IServiceLoader::class, function () {
 			return $this;
 		});
+
+		$this->registerService('RegulateAppAccessService', function (Server $c) {
+			return new RegulateAppAccess($c->getLogger());
+		});
 	}
 
 	/**
@@ -1678,5 +1683,14 @@ class Server extends ServerContainer implements IServerContainer, IServiceLoader
 	 */
 	public function getShutdownHandler() {
 		return $this->query(ShutDownManager::class);
+	}
+
+	/**
+	 * @return RegulateAppAccess
+	 * @throws QueryException
+	 * @since 10.3.1
+	 */
+	public function getRegulateAppAccessService() {
+		return $this->query('RegulateAppAccessService');
 	}
 }
