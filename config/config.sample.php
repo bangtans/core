@@ -170,7 +170,7 @@ $CONFIG = array(
  */
 
 /**
- * Define the default language of your ownCloud instance
+ * Defines the default language of your ownCloud instance
  * Using ISO_639-1 language codes such as `en` for English, `de` for German, and `fr` for French.
  * Overrides automatic language detection on public pages like login or shared items.
  * User's language preferences configured under `personal -> language` override
@@ -179,7 +179,7 @@ $CONFIG = array(
 'default_language' => 'en_GB',
 
 /**
- * Define the default app to open on user login
+ * Defines the default app to open on user login
  * Use the app names as they appear in the URL after clicking them in the Apps menu,
  * such as files, documents or calendar etc. You can use a comma-separated list of app names,
  * so if the first app is not enabled for a user then ownCloud will try the second one, and so
