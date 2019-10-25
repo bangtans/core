@@ -43,7 +43,7 @@ $CONFIG = array(
 /**
  * App: LDAP
  * 
- * Possible values: `ldapIgnoreNamingRules` 'doSet' or `false`.
+ * Possible values: `ldapIgnoreNamingRules` `doSet` or `false`.
  * 
  * Possible values: `user_ldap.enable_medial_search` `true` or `false`.
  */

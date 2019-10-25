@@ -33,7 +33,7 @@ $CONFIG = array(
 
 /**
  * Unique identifier for your ownCloud installation
- * This unique identifyer is created automatically by the installer.
+ * This unique identifier is created automatically by the installer.
  * This example is for documentation only, and you should never use it because it will not work.
  * A valid `instanceid` is created when you install ownCloud. Needs to start with a letter.
  *
@@ -91,7 +91,7 @@ $CONFIG = array(
 
 /**
  * Show or hide the ownCloud version information in `status.php`
- * Hardening an ownCloud instance by hiding the version information in `status.php`.
+ * This hardens an ownCloud instance by hiding the version information in `status.php`.
  * This can be a legitimate step. Please consult the documentation before enabling this.
  */
 'version.hide' => false,
@@ -181,7 +181,7 @@ $CONFIG = array(
 /**
  * Define the default app to open on user login
  * Use the app names as they appear in the URL after clicking them in the Apps menu,
- * such as files, documents or calendar ect. You can use a comma-separated list of app names,
+ * such as files, documents or calendar etc. You can use a comma-separated list of app names,
  * so if the first app is not enabled for a user then ownCloud will try the second one, and so
  * on. If no enabled apps are found it defaults to the Files app.
  */
@@ -189,13 +189,13 @@ $CONFIG = array(
 
 /**
  * Enables or removes the Help menu item in the user menu
- * The Help menue can be found in top right of the ownCloud Web interface.
+ * The Help menu can be found in top right of the ownCloud Web interface.
  * `true` enables the Help menu item, `false` removes the help item.
  */
 'knowledgebaseenabled' => true,
 
 /**
- * Enables or disable  avatars or user profile photos
+ * Enables or disables  avatars or user profile photos
  * `true` enables avatars, or user profile photos, `false` disables them.
  * These appear on the User page, on user's Personal pages and are used by some apps
  * (contacts, mail, etc). 
@@ -203,21 +203,21 @@ $CONFIG = array(
 'enable_avatars' => true,
 
 /**
- * Allow or disallow users to change their display names
+ * Allows or disallows users to change their display names
  * `true` allows users to change their display names (on their Personal pages),
  * `false` prevents them from changing their display names.
  */
 'allow_user_to_change_display_name' => true,
 
 /**
- * Define the lifetime of the remember login cookie
+ * Defines the lifetime of the remember login cookie
  * The remember login cookie is set when the user clicks the `remember` checkbox
  * on the login screen. The default is 15 days, expressed in seconds.
  */
 'remember_login_cookie_lifetime' => 60*60*24*15,
 
 /**
- * Define the lifetime of a session after inactivity
+ * Defines the lifetime of a session after inactivity
  * The default is 20 minutes, expressed in seconds.
  */
 'session_lifetime' => 60 * 20,
@@ -237,7 +237,7 @@ $CONFIG = array(
 'token_auth_enforced' => false,
 
 /**
- * Define additional login buttons on the logon screen
+ * Defines additional login buttons on the logon screen
  * Allows to specify additional login buttons on the logon screen for e.g. SSO integration
  *  'login.alternatives' => [
  *    ['href' => 'https://www.testshib.org/Shibboleth.sso/ProtectNetwork?target=https%3A%2F%2Fmy.owncloud.tld%2Flogin%2Fsso-saml%2F', 'name' => 'ProtectNetwork', 'img' => '/img/PN_sign-in.gif'],
@@ -258,7 +258,7 @@ $CONFIG = array(
 'csrf.disabled' => false,
 
 /**
- * Define the directory where the skeleton files are located
+ * Defines the directory where the skeleton files are located
  * These files will be copied to the data directory of new users.
  * Leave empty to not copy any skeleton files.
  */
@@ -1294,7 +1294,7 @@ $CONFIG = array(
   ],
 
 /**
- * Define excluded files from integrity checking
+ * Define files that are excluded from integrity checking
  * Exclude files from the integrity checker command
  */
 'integrity.excluded.files' => [
@@ -1307,7 +1307,7 @@ $CONFIG = array(
   ],
 
 /**
- * Define excluded apps or themes from integrity checking
+ * Define apps or themes that are excluded from integrity checking
  * The list of apps that are allowed to have no signature.json. Besides
  * ownCloud apps, this is particularly useful when creating ownCloud themes,
  * because themes are treated as apps. The app is identified with it´s app-id.
@@ -1453,7 +1453,7 @@ $CONFIG = array(
 'filelocking.ttl' => 3600,
 
 /**
- * Define memory caching backend for file locking
+ * Define the memory caching backend for file locking
  *
  * Because most memcache backends can clean values without warning,
  * using redis is highly recommended to *avoid data loss*.
